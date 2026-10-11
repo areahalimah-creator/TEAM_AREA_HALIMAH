@@ -2823,6 +2823,14 @@ function renderSmallwareAdminActions(row){
 async function saveSmallwareRequestUI(){
   if(!state.user) return;
 
+  // Ambil Store langsung dari dropdown Request Smallware agar targetStore selalu terdefinisi.
+  const targetStore = ($('swStore')?.value || '').trim();
+  if(!targetStore){
+    toast('Pilih Store terlebih dahulu.');
+    $('swStore')?.focus();
+    return;
+  }
+
   const name = $('swName').value.trim();
   const qty = Number($('swQty').value||0);
   const type = $('swType').value;
